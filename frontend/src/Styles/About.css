@@ -1,0 +1,22 @@
+.about_wallpaper {
+    width: 100%;
+    height: 550px; 
+}
+
+@media (max-width: 1024px) {
+    .about_wallpaper {
+        height: 450px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .about_wallpaper {
+        height: 350px; 
+    }
+}
+
+@media (max-width: 576px) {
+    .about_wallpaper {
+        height: 250px; 
+    }
+}
