@@ -1,33 +1,35 @@
-import http from 'http'
+import mongoose from 'mongoose';
 import cors from 'cors'
-import dotenv from 'dotenv'
 import express from 'express';
-
-import authRoutes from './routes/authRoutes.js'
-import productRoutes from './routes/productRoutes.js'
-import searchRoutes from './routes/searchRoutes.js';
-
-
-const PORT = process.env.PORT || 3000;
-
+import dotenv from 'dotenv'
 dotenv.config();
 const app = express();
+
+import authRoutes from './routes/authRoutes.js';
+import productRoutes from './routes/productRoutes.js';
+
+
+const PORT = process.env.PORT || 5001;
+
 
 //Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 //Routes
 app.use('/auth', authRoutes);
+// app.use('/search', searchRoutes);
 app.use('/products', productRoutes);
-app.use('/search', searchRoutes);
 
 
+mongoose.connect(process.env.MONGO_URL)
+.then(() =>{
+    console.log("MongoDB connected")
+    console.log("Connected DB name:", mongoose.connection.name);
 
-http.createServer(app).listen(PORT, (err) =>{
-    if(err){
-       console.error(err)
-    }else{
-        console.log(`Server started at http://127.0.0.1:${PORT}`);
-    }
+    app.listen(PORT, () => console.log(`Server started on Port ${PORT}`));
+})
+.catch((err)=>{
+    console.error("Message", err);
 })

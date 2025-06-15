@@ -10,25 +10,32 @@ const SearchBar = ({ onSearch }) => {
 
   return (
     <>
-      <Row>
-        <Col xs={12}>
-          <input
-            className="w-75 p-1 border border-black"
-            type="text"
-            style={{ borderTopRightRadius: '0', borderBottomRightRadius: '0' }}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search for products..."
-          />
-          <button
-            className="w-25 p-1 mb-1 btn btn-outline-primary"
-            style={{ borderTopLeftRadius: '0', borderBottomLeftRadius: '0' }}
-            onClick={handleSearchClick}
-          >
-            Search
-          </button>
+      <Row className="mb-4">
+        <Col xs={12} md={8} className="mx-auto">
+          <form onSubmit={(e) => {
+              e.preventDefault();
+              handleSearchClick();
+            }}>
+            <div className="input-group">
+              <input
+                type="search"
+                className="form-control border-dark"
+                placeholder="Search for products..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <button
+                className="btn btn-primary"
+                type="submit"
+              >
+                Search
+              </button>
+            </div>
+          </form>
         </Col>
       </Row>
+
+
     </>
   );
 };

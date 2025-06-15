@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom';
 function NavScrollExample() {
   return (
     <Form>
-      <Navbar sticky="top" expand="lg" className="bg-dark">
+      <Navbar expand="lg" className="bg-dark">
         <Container fluid>
           <Navbar.Brand className='fw-bold text-white'>Spice & Sizzle</Navbar.Brand>
           <Navbar.Toggle className=" avbar-toggler-icon bg-white " aria-controls="navbarScroll"/>
@@ -25,8 +25,8 @@ function NavScrollExample() {
               <Nav.Link className='text-white' as={NavLink} to='/about'>About</Nav.Link>
               <Nav.Link className='text-white' as={NavLink} to='/contact'>Contact</Nav.Link>
               <Nav.Link className='text-white' as={NavLink} to='/menu'>Menu</Nav.Link>
-              <Nav.Link className='text-white' as={NavLink} to='/signup'>Sign up</Nav.Link>
               <Nav.Link className='text-white' as={NavLink} to='/login'>Login</Nav.Link>
+              <Nav.Link className='text-white' as={NavLink} to='/signup'>Sign up</Nav.Link>
 
             </Nav>
           </Navbar.Collapse>

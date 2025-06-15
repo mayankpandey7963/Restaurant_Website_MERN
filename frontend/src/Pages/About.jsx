@@ -9,7 +9,7 @@ import Footer from '../Components/Footer'
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 // css
-import '../Styles/About.css'
+import '../css/About.css'
 
 const About = () => {
   return (

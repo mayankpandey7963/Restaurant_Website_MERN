@@ -5,27 +5,36 @@ import Counter from "./Counter";
 
 const FoodCard = ({ title, price, discount, description, imgSrc }) => {
   return (
-    <Card className='h-100'>
-      <Card.Img variant="top" style={{ height: '12rem' }} src={imgSrc} />
-      <Card.Body>
-        <Card.Title>
-          <h4>{title}</h4>
-          <div className="rates">
-            <strong className='pe-2 text-success'>${price}</strong>
-            <small className='text-danger'>{discount}% Off</small>
+    <Card className="h-100 shadow-sm border-0">
+      <Card.Img
+        variant="top"
+        style={{ height: '12rem', objectFit: 'cover', borderRadius: '0.5rem 0.5rem 0 0' }}
+        src={imgSrc}
+      />
+    
+      <Card.Body className="d-flex flex-column justify-content-between">
+        <div>
+          <Card.Title as="h5" className="mb-2 text-dark fw-semibold">{title}</Card.Title>
+      
+          <div className="mb-2">
+            <span className="text-success fw-bold me-2">&#8377;{price}</span>
+            <span className="text-muted small">{discount}% Off</span>
           </div>
-        </Card.Title>
-        <Card.Text>
-          <b className='text-danger'>Description: </b> {description}
-        </Card.Text>
-        <div className="btn_container d-flex justify-content-between">
-          <Button variant='danger' className='fw-bold border-0'>
+      
+          <Card.Text className="text-secondary small">
+            {description}
+          </Card.Text>
+        </div>
+      
+        <div className="d-flex justify-content-between align-items-center mt-3">
+          <Button variant="outline-primary" size="sm" className="fw-medium px-3">
             Explore <MdKeyboardDoubleArrowRight />
           </Button>
           <Counter />
         </div>
       </Card.Body>
     </Card>
+
   );
 };
 

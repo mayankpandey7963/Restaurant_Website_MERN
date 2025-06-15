@@ -1,44 +1,40 @@
-import React from 'react'
-import {Routes, Route} from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import React from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
+import Home from './Pages/Home';
+import About from './Pages/About';
+import Contact from './Pages/Contact';
+import Menu from './Pages/Menu';
+import Login from './Components/Login';
+import Signup from './Components/Signup';
 
-// Pages
-
-  import Home from './Pages/Home'
-  import About from './Pages/About'
-  import Contact from './Pages/Contact'
-  import Menu from './Pages/Menu'
-  import Signup from './Components/Signup'
-  import Login from './Components/Login'
-  import ScrollToTop from './Components/ScrollToTop';
-
-
-// Components
-
-  import NavScrollExample from './Components/NavScrollExample'
-  import Axios from '../Axios'
+import NavScrollExample from './Components/NavScrollExample';
+import ScrollToTop from './Components/ScrollToTop';
+import Axios from '../Axios';
 
 const App = () => {
+  const location = useLocation();
+  const hideNavbar = location.pathname === '/login' || location.pathname === '/signup';
+
   return (
-    <div>
-      
-      <NavScrollExample/>
-      <ScrollToTop/>
-      <Axios/>  
+    <>
+      {!hideNavbar && <NavScrollExample />}
+      <ScrollToTop />
+      <Axios />
 
-    <Routes>
-      <Route path='/' element={<Home/>} ></Route>
-      <Route path='/about' element={<About/>} ></Route>
-      <Route path='/contact' element={<Contact/>} ></Route>
-      <Route path='/menu' element={<Menu/>} ></Route>
-      <Route path='/signup' element={<Signup/>} ></Route>
-      <Route path='/login' element={<Login/>} ></Route>
-      
-    </Routes>
+      <Routes>
 
-    </div>
-  )
-}
+        <Route path="/" element={<Home />}/>
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
 
-export default App
+      </Routes>
+    </>
+  );
+};
+
+export default App;

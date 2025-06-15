@@ -5,9 +5,11 @@ const TypeWriterEffect = () => {
   return (
     <div >
       {/* Top Line */}
-      <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+      <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
         <Typewriter
-          words={["Bringing you Flavors from Around the World"]}
+          words={[
+            "Bringing you Flavors from Around the World"
+          ]}
           loop={0}         
           typeSpeed={70}
           deleteSpeed={50}
@@ -19,7 +21,7 @@ const TypeWriterEffect = () => {
       {/* Bottom Line */}
       <div style={{ fontSize: '1.2rem', marginTop: '1rem' }}>
         <Typewriter
-          words={[" - Enjoy our diverse menu."]}
+          words={[" Enjoy our diverse menu."]}
           loop={0}
           typeSpeed={70}
           deleteSpeed={50}

@@ -1,121 +1,105 @@
-import React, { useState } from 'react'
-import {Form, Container, Row, Col, Button } from 'react-bootstrap'
+import React, { useState } from 'react';
+import { Form, Container, Row, Col, Button, Card } from 'react-bootstrap';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
-import {Link} from 'react-router-dom'
-
-// icons
-import { FaFacebook } from "react-icons/fa";
-import { FaGoogle } from "react-icons/fa";
+import { useNavigate, Link } from 'react-router-dom';
+import { FaFacebook, FaGoogle } from 'react-icons/fa';
 
 const Signup = () => {
-
   const [signUpData, setSignUpData] = useState({
     name: '',
     email: '',
-    password: ''
-  })
+    password: '',
+  });
 
   const navigate = useNavigate();
-  const handleChange = (e) =>{
+
+  const handleChange = (e) => {
     setSignUpData({
       ...signUpData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = async (e) =>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted", signUpData);
     try {
-      const response = await axios.post('http://localhost:3000/auth/signup', signUpData);
-      console.log(response.data)
-      if(response.status === 200){
-        navigate('/login')
+      const response = await axios.post('http://localhost:5000/auth/signup', signUpData);
+      if (response.status === 200) {
+        navigate('/login');
+        setSignUpData({ name: '', email: '', password: '' });
       }
-      setSignUpData({
-        name: '',
-        email: '',
-        password: ''
-      })
     } catch (err) {
       console.error(err);
-      alert("An error occured while signing up in the database. please try again...");
+      alert('An error occurred while signing up. Please try again.');
     }
-    
-  }
+  };
 
-  const handleReset = () =>{
-    setSignUpData({
-      name: '',
-      email: '',
-      password: ''
-    })
-  } 
+  const handleReset = () => {
+    setSignUpData({ name: '', email: '', password: '' });
+  };
 
   return (
+    <Container className="d-flex justify-content-center align-items-center min-vh-100">
+      <Card className="shadow-sm p-3 w-100" style={{ maxWidth: '360px' }}>
+        <h4 className="text-center fw-semibold mb-3">Sign Up</h4>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-2" controlId="form-name">
+            <Form.Label className="small">Full Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="name"
+              value={signUpData.name}
+              onChange={handleChange}
+              required
+              placeholder="Enter your name"
+            />
+          </Form.Group>
 
-      <Container className='mt-5'>
-        
-        <Form  onSubmit={handleSubmit}>
-          <Row >
-            <Col sm={4} className='mx-auto' style={{backgroundColor: '#87CEEB'}}>
-            <h2 className='text-center fw-bold '>Sign up</h2>
+          <Form.Group className="mb-2" controlId="form-email">
+            <Form.Label className="small">Email address</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              value={signUpData.email}
+              onChange={handleChange}
+              required
+              placeholder="Enter your email"
+            />
+          </Form.Group>
 
-              <Row>
-                <Col sm={12}>
-                  <Form.Group controlId='form-name'>
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control type='text' name='name' value={signUpData.name} onChange={handleChange} required></Form.Control>
-                  </Form.Group>
-                </Col>
-              </Row>
+          <Form.Group className="mb-3" controlId="form-password">
+            <Form.Label className="small">Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              value={signUpData.password}
+              onChange={handleChange}
+              required
+              placeholder="Enter your password"
+            />
+          </Form.Group>
 
-              <Row>
-                <Col sm={12}>
-                  <Form.Group controlId='form-email'>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type='email' name='email'  value={signUpData.email} onChange={handleChange} required></Form.Control>
-                  </Form.Group>         
-                </Col>
-              </Row>
+          <div className="d-grid gap-2 mb-2">
+            <Button variant="primary" size="sm" type="submit">Sign Up</Button>
+            <Button variant="outline-secondary" size="sm" onClick={handleReset}>Reset</Button>
+          </div>
 
-              <Row>
-                <Col sm={12}>
-                  <Form.Group controlId='form-password'>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type='password' name='password' value={signUpData.password} onChange={handleChange} required></Form.Control>
-                  </Form.Group>
-                </Col>
-              </Row>
+          <div className="text-center mb-2">
+            <Link to="/login" className="small text-decoration-none">Already have an account? Log In</Link>
+          </div>
 
-              <div className='btn_container w-75 d-flex justify-content-center mx-auto my-3'>
-                <Button variant='primary' className='w-100' type='submit'>Submit</Button>
-                <Button variant='danger' type='reset' onClick={handleReset} className='w-100 ms-2'>Reset</Button>
-              </div>
+          <hr className="my-3" />
 
-              <div className='d-flex justify-content-center mb-3'>
-                <Link className='text-decoration-none text-white' to="/Login">Already have an account ?</Link>
-              </div>
-
-              <Row className='w-75 mx-auto g-0'>
-                <Col className='w-100' sm={12}>
-                  <Button className='w-100' variant='success'><FaFacebook /><a className='text-decoration-none text-white ps-2' href="signup with facebook">Sign up with Facebook</a></Button>
-                </Col>
-              </Row>
-
-              <Row className='w-75 mx-auto g-0'>
-                <Col className='w-100 py-3' sm={12}>
-                  <Button className='w-100' variant='success'><FaGoogle /><a className='text-decoration-none text-white ps-2' href="signup with google">Sign up with Google</a></Button>
-                </Col>
-              </Row>
-
-            </Col>
-          </Row>
+          <Button variant="light" className="w-100 mb-2 border text-dark small">
+            <FaFacebook className="me-2" /> Sign up with Facebook
+          </Button>
+          <Button variant="light" className="w-100 border text-dark small">
+            <FaGoogle className="me-2" /> Sign up with Google
+          </Button>
         </Form>
-      </Container>
-   
-  )
-}
+      </Card>
+    </Container>
+  );
+};
 
-export default Signup
+export default Signup;

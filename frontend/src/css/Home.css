@@ -1,0 +1,29 @@
+.subheading{
+    background-color: red;
+    box-shadow: 0 0 7px 1px white;
+}
+
+.imgage_1{
+    border-radius: 20px;
+    box-shadow: 8px 8px 3px gray;
+}
+.imgage_2{
+    border-radius: 20px;
+    box-shadow: -8px 8px 3px gray;
+}
+
+.slideImage{
+    height: 450px;
+}
+
+
+/* SPECIAL_OFFERS */
+
+.special_Offers .caption{
+    background-color: red;
+    border-radius: 7px;
+}
+
+.card_food{
+    height: 13rem;
+}
